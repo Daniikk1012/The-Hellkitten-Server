@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://ghgvwjgohu0v"]
+
+[ext_resource type="Script" path="res://script/player.gd" id="1_2gmhk"]
+[ext_resource type="Texture2D" uid="uid://q1u6ou86wmw4" path="res://asset/player.png" id="2_6e4ie"]
+[ext_resource type="AudioStream" uid="uid://bvudtjrnjaupb" path="res://asset/fix.wav" id="2_id0qs"]
+[ext_resource type="AudioStream" uid="uid://ysmh5jbpna1j" path="res://asset/die.wav" id="3_iv5bd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe13p"]
+size = Vector2(32, 64)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_2gmhk")
+SPEED = 540.0
+
+[node name="Fix" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_id0qs")
+
+[node name="Die" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_iv5bd")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("2_6e4ie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fe13p")

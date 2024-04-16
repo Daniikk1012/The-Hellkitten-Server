@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkru85sgw8bt1"]
+
+[ext_resource type="Script" path="res://script/litter.gd" id="1_lfj7s"]
+[ext_resource type="Texture2D" uid="uid://d1p6brng2px41" path="res://asset/litter.png" id="2_nwpx1"]
+[ext_resource type="Texture2D" uid="uid://cfsj4ll21a66o" path="res://asset/litter-full.png" id="3_ppc2q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lnjq"]
+size = Vector2(48, 48)
+
+[node name="Litter" type="Area2D"]
+z_index = -1
+script = ExtResource("1_lfj7s")
+NORMAL_TEXTURE = ExtResource("2_nwpx1")
+FULL_TEXTURE = ExtResource("3_ppc2q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5lnjq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

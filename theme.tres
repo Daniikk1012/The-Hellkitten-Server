@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c4bwvbjqls6cs"]
+
+[ext_resource type="FontFile" uid="uid://cffa8fshgk6yo" path="res://asset/Neucha-Regular.ttf" id="1_mtv47"]
+
+[resource]
+Button/font_sizes/font_size = 48
+Button/fonts/font = ExtResource("1_mtv47")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 16
+Label/font_sizes/font_size = 48
+Label/fonts/font = ExtResource("1_mtv47")
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://behccs16pe0sx"]
+
+[ext_resource type="Script" path="res://script/bowl.gd" id="1_03oe3"]
+[ext_resource type="Texture2D" uid="uid://0biy42r0n2r1" path="res://asset/bowl.png" id="2_01b0q"]
+[ext_resource type="Texture2D" uid="uid://ckivgl2gc5on6" path="res://asset/bowl-empty.png" id="3_a6vsj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jd80p"]
+radius = 24.0
+
+[node name="Bowl" type="Area2D"]
+z_index = -1
+script = ExtResource("1_03oe3")
+NORMAL_TEXTURE = ExtResource("2_01b0q")
+EMPTY_TEXTURE = ExtResource("3_a6vsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jd80p")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

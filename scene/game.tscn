@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://l3rhrr8qnv6t"]
+
+[ext_resource type="Script" path="res://script/game.gd" id="1_ib8nx"]
+[ext_resource type="PackedScene" uid="uid://ghgvwjgohu0v" path="res://scene/player.tscn" id="1_skp0i"]
+[ext_resource type="PackedScene" uid="uid://ddccu08msbhj5" path="res://scene/cat.tscn" id="2_o7n57"]
+[ext_resource type="PackedScene" uid="uid://dkru85sgw8bt1" path="res://scene/litter.tscn" id="3_2jx3i"]
+[ext_resource type="PackedScene" uid="uid://behccs16pe0sx" path="res://scene/bowl.tscn" id="4_aelb4"]
+[ext_resource type="Texture2D" uid="uid://xrb0lvfkt3il" path="res://asset/pentagram.png" id="5_khhmp"]
+[ext_resource type="Theme" uid="uid://c4bwvbjqls6cs" path="res://theme.tres" id="7_bfu1s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pek2u"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_u5vna"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4lovw"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_obq4y"]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_ib8nx")
+SIZE = Vector2(1920, 1080)
+CAT_SCENE = ExtResource("2_o7n57")
+LITTER_SCENE = ExtResource("3_2jx3i")
+BOWL_SCENE = ExtResource("4_aelb4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LeftBoundary" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary"]
+shape = SubResource("WorldBoundaryShape2D_pek2u")
+
+[node name="TopBoundary" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBoundary"]
+shape = SubResource("WorldBoundaryShape2D_u5vna")
+
+[node name="RightBoundary" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary"]
+shape = SubResource("WorldBoundaryShape2D_4lovw")
+
+[node name="BottomBoundary" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary"]
+shape = SubResource("WorldBoundaryShape2D_obq4y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+scale = Vector2(8, 8)
+texture = ExtResource("5_khhmp")
+
+[node name="Player" parent="." instance=ExtResource("1_skp0i")]
+position = Vector2(0, 128)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_bfu1s")
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("7_bfu1s")
+
+[node name="Button" type="Button" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("7_bfu1s")
+text = "RESTART"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Button" to="." method="_on_button_pressed"]

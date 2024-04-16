@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddccu08msbhj5"]
+
+[ext_resource type="Script" path="res://script/cat.gd" id="1_7u16g"]
+[ext_resource type="Texture2D" uid="uid://tf25bj8ql8o2" path="res://asset/cat.png" id="2_83fjd"]
+[ext_resource type="Texture2D" uid="uid://djt4cv8pmmtr6" path="res://asset/cat-angry.png" id="3_d6hqb"]
+[ext_resource type="AudioStream" uid="uid://dhkbijt0oyksq" path="res://asset/poop.wav" id="4_nx87d"]
+[ext_resource type="AudioStream" uid="uid://1v4bjulslx5b" path="res://asset/cat.wav" id="4_rxgrl"]
+[ext_resource type="AudioStream" uid="uid://b8noa2q0yt6ks" path="res://asset/eat.wav" id="5_y26iv"]
+[ext_resource type="AudioStream" uid="uid://c07a1mp5xj1fw" path="res://asset/angry.wav" id="6_32pai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ib1cd"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mv1aj"]
+size = Vector2(64, 64)
+
+[node name="Cat" type="CharacterBody2D"]
+script = ExtResource("1_7u16g")
+SPEED = 360.0
+NORMAL_TEXTURE = ExtResource("2_83fjd")
+ANGRY_TEXTURE = ExtResource("3_d6hqb")
+
+[node name="Cat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rxgrl")
+
+[node name="Poop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_nx87d")
+
+[node name="Eat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_y26iv")
+
+[node name="Angry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_32pai")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ib1cd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mv1aj")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
